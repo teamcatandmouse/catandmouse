@@ -14,8 +14,8 @@ namespace CatAndMouse
 {
    public class Player
     {
-       // public Sprite playerSprite = new Sprite();
-
+        Sprite playerSprite = new Sprite();
+        
         MainGame game = null;
         float playerSpeed = 175;
         float playerRotateSpeed = 5;
@@ -23,6 +23,28 @@ namespace CatAndMouse
         Vector2 playerOffset = new Vector2(0, 0);
         float playerAngle = 0;
         bool playerAlive = false;
+
+        public Player()
+        {
+
+        }
+
+        public void Load(ContentManager content, MainGame theGame)
+        {
+            playerSprite.Load(content, "Mouse", true);
+        }
+
+        public void Update(float deltaTime)
+        {
+            playerSprite.Update(deltaTime);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            playerSprite.Draw(spriteBatch);
+        }
+
+
 
 
 

@@ -44,6 +44,16 @@ namespace CatAndMouse
 			UpdateHitBox();
 		}
 
+        public void Update(float deltaTime)
+        {
+
+        }
+
+        public void Draw(SpriteBatch spritebatch)
+        {
+            spritebatch.Draw(texture, position + offset, Color.White);
+        }
+
 
 
 		public void UpdateHitBox()

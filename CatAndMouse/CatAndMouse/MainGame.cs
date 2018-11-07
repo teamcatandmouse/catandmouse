@@ -15,11 +15,15 @@ namespace CatAndMouse
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Player player = new Player();
 
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            //graphics.PreferredBackBufferWidth = 700;
+           // graphics.PreferredBackBufferHeight = 600;
         }
 
         /// <summary>
@@ -44,6 +48,7 @@ namespace CatAndMouse
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            player.Load(Content, this);
             // TODO: use this.Content to load your game content here
         }
 
@@ -66,6 +71,9 @@ namespace CatAndMouse
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            player.Update(deltaTime);
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -80,6 +88,13 @@ namespace CatAndMouse
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            spriteBatch.Begin();
+
+            player.Draw(spriteBatch);
+
+            spriteBatch.End();
+
 
             base.Draw(gameTime);
         }
