@@ -45,11 +45,8 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="StateManager.cs" />
-=======
     <Compile Include="Sprite.cs" />
->>>>>>> c8c2594333c83306cb85b370dd47bf8151ee052c
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
