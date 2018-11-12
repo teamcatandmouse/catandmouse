@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace CatAndMouse
 {
-	class Sprite
+	public class Sprite
 	{
 		public Vector2 position = Vector2.Zero;
 		public Vector2 velocity = Vector2.Zero;

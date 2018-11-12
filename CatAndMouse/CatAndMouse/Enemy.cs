@@ -11,39 +11,36 @@ namespace CatAndMouse
 {
     public class Enemy
     {
-        float walkSpeed = 7500f;
         public Sprite enemySprite = new Sprite();
+
+        Texture2D texture;
+
+        float walkSpeed = 7500f;
         Collision collisions = new Collision();
         MainGame game = null;
 
         public void Load(ContentManager content, MainGame game)
         {
+            enemySprite.Load(content, "BCat", true);
             this.game = game;
 
-            
-            animation.Load(content, "", 4, 5);
-
-
-            enemySprite.AddAnimation(animation, 16, 0);
-            enemySprite.width = 64;
-            enemySprite.height = 64;
-            enemySprite.offset = new Vector2(8, 8);
+            enemySprite.velocity = Vector2.Zero;
+            //enemySprite.position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, 0);       
 
         }
 
         public void Update(float deltaTime)
         {
-            enemySprite.velocity = new Vector2(walkSpeed, 0) * deltaTime;
-            enemySprite.position += enemySprite.velocity * deltaTime;
-
-            collisions.game = game;
-            
-
-
-
+            collisions.game = game;           
+            enemySprite.Update(deltaTime);
+            enemySprite.UpdateHitBox();
 
         }
 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            enemySprite.Draw(spriteBatch);
+        }
 
 
 
