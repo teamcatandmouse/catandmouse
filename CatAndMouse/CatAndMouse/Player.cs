@@ -12,10 +12,10 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace CatAndMouse
 {
-   public class Player
+   class Player
     {
-        Sprite playerSprite = new Sprite();
-        
+        public Sprite playerSprite = new Sprite();
+
         MainGame game = null;
         float playerSpeed = 12500f;
         //float playerMaxSpeed = 400f;
@@ -33,14 +33,20 @@ namespace CatAndMouse
         public void Load(ContentManager content, MainGame theGame)
         {
             playerSprite.Load(content, "Mouse", true);
+            game = theGame;
 
             playerSprite.velocity = Vector2.Zero;
+
+            playerSprite.velocity = Vector2.Zero;
+            playerSprite.position = new Vector2(theGame.GraphicsDevice.Viewport.Width / 2, 0);
+           
         }
 
         public void Update(float deltaTime)
         {
             UpdateInput(deltaTime);
             playerSprite.Update(deltaTime);
+            playerSprite.UpdateHitBox();
         }
 
         public void Draw(SpriteBatch spriteBatch)
