@@ -1,10 +1,10 @@
-﻿using CatAndMouse.Models;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections;
-using System.Collections.Generic;
+
+
 
 namespace CatAndMouse
 {
@@ -15,9 +15,7 @@ namespace CatAndMouse
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        // Player player = new Player();
-
-        private List<Player> _sprites;
+        Player player = new Player();
 
         public MainGame()
         {
@@ -50,35 +48,9 @@ namespace CatAndMouse
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //player.Load(Content, this);
+            player.Load(Content, this);
             // TODO: use this.Content to load your game content here
-
-            var animations = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(Content.Load<Texture2D>("Player/M_WalkUp"), 3) },
-                { "WalkDown", new Animation(Content.Load<Texture2D>("Player/M_WalkDown"), 3) },
-                { "WalkLeft", new Animation(Content.Load<Texture2D>("Player/M_WalkLeft"), 3) },
-                { "WalkRight", new Animation(Content.Load<Texture2D>("Player/M_WalkRight"), 3) },
-            };
-
-            _sprites = new List<Player>()
-            {
-                new Player(animations)
-                {
-                    position = new Vector2(100, 100),
-                    Input = new Input()
-                    {
-                        Up = Keys.Up,
-                        Down = Keys.Down,
-                        Left = Keys.Left,
-                        Right = Keys.Right,
-                    },
-               
-                },                 
-            };
         }
-
-
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -96,13 +68,11 @@ namespace CatAndMouse
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            foreach (var sprite in _sprites)
-                sprite.Update(gameTime, _sprites);
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-               // Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
 
-           // float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //player.Update(deltaTime);
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            player.Update(deltaTime);
 
             // TODO: Add your update logic here
 
@@ -121,8 +91,7 @@ namespace CatAndMouse
 
             spriteBatch.Begin();
 
-            // player.Draw(spriteBatch);
-            foreach (var sprite in _sprites)sprite.Draw(spriteBatch);
+            player.Draw(spriteBatch);
 
             spriteBatch.End();
 
