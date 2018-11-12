@@ -18,13 +18,16 @@ namespace CatAndMouse
         SpriteBatch spriteBatch;
         Player player = new Player();
 
+        SpriteFont arialFont;
+        int score = 0;
+
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            //graphics.PreferredBackBufferWidth = 700;
-           // graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 750;
+            graphics.PreferredBackBufferHeight = 650;
         }
 
         /// <summary>
@@ -50,6 +53,8 @@ namespace CatAndMouse
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             player.Load(Content, this);
+
+            arialFont = Content.Load<SpriteFont>("Arial");
             // TODO: use this.Content to load your game content here
         }
 
@@ -94,6 +99,10 @@ namespace CatAndMouse
 
             player.Draw(spriteBatch);
 
+            spriteBatch.End();
+
+            spriteBatch.Begin();
+            spriteBatch.DrawString(arialFont, "Score : " + score.ToString(), new Vector2(650, 600), Color.White);
             spriteBatch.End();
 
 
