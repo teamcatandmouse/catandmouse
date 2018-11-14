@@ -44,6 +44,7 @@
     <Compile Include="AnimatedTexture.cs" />
     <Compile Include="Collectable.cs" />
     <Compile Include="Collision.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

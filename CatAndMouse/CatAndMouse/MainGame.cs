@@ -20,6 +20,7 @@ namespace CatAndMouse
         SpriteBatch spriteBatch;
 
         Player player = new Player();
+        //Enemy enemy = new Enemy();
 
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
@@ -60,6 +61,7 @@ namespace CatAndMouse
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             player.Load(Content, this);
+            enemy.Load(Content, this);
 
             //scoreFont = Content.Load<SpriteFont>("Score");
 
@@ -91,6 +93,7 @@ namespace CatAndMouse
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);
+            
 
 
             // TODO: Add your update logic here
@@ -112,6 +115,7 @@ namespace CatAndMouse
             mapRenderer.Draw(map);           
 
             player.Draw(spriteBatch);
+            enemy.Draw(spriteBatch);
 
             //spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
             spriteBatch.End();
