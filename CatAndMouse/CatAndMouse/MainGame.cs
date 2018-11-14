@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using MonoGame.Extended.Tiled;
+using MonoGame.Extended.Tiled.Graphics;
 using System;
 using System.Collections;
 
@@ -15,18 +18,23 @@ namespace CatAndMouse
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         Player player = new Player();
 
-        SpriteFont arialFont;
-        int score = 0;
+        TiledMap map = null;
+        TiledMapRenderer mapRenderer = null;
+
+
+        SpriteFont scoreFont;
+        public int score = 0;
 
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 750;
-            graphics.PreferredBackBufferHeight = 650;
+            graphics.PreferredBackBufferWidth = 768;
+            graphics.PreferredBackBufferHeight = 672;
         }
 
         /// <summary>
@@ -38,7 +46,7 @@ namespace CatAndMouse
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            
             base.Initialize();
         }
 
@@ -53,7 +61,12 @@ namespace CatAndMouse
 
             player.Load(Content, this);
 
-            arialFont = Content.Load<SpriteFont>("Arial");
+            //scoreFont = Content.Load<SpriteFont>("Score");
+
+
+            map = Content.Load<TiledMap>("Level");
+            mapRenderer = new TiledMapRenderer(GraphicsDevice);
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -79,6 +92,7 @@ namespace CatAndMouse
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);
 
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -95,17 +109,16 @@ namespace CatAndMouse
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
+            mapRenderer.Draw(map);           
 
             player.Draw(spriteBatch);
 
-            spriteBatch.End();
-
-            spriteBatch.Begin();
-            spriteBatch.DrawString(arialFont, "Score : " + score.ToString(), new Vector2(650, 600), Color.White);
+            //spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
             spriteBatch.End();
 
 
             base.Draw(gameTime);
         }
+
     }
 }

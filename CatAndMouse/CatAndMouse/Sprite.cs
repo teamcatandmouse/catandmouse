@@ -25,6 +25,12 @@ namespace CatAndMouse
 		public int theTop = 0;
 		public int theBottom = 0;
 
+        List<AnimatedTexture> animations = new List<AnimatedTexture>();
+        List<Vector2> animationOffsets = new List<Vector2>();
+        int currentAnimation = 0;
+
+        SpriteEffects effects = SpriteEffects.None;
+
 		public Sprite()
 		{
 
@@ -44,14 +50,21 @@ namespace CatAndMouse
 			UpdateHitBox();
 		}
 
-        public void Update(float deltaTime)
+        public void AddAnimation(AnimatedTexture animation, int xOffset = 0, int yOffset = 0)
         {
-
+            animations.Add(animation);
+            animationOffsets.Add(new Vector2(xOffset, yOffset));
         }
 
-        public void Draw(SpriteBatch spritebatch)
+        public void Update(float deltaTime)
         {
-            spritebatch.Draw(texture, position + offset, Color.White);
+            animations[currentAnimation].UpdateFrame(deltaTime);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            //spritebatch.Draw(texture, position + offset, Color.White);
+            animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation], effects);
         }
 
 
@@ -63,6 +76,28 @@ namespace CatAndMouse
 			theTop = (int)position.Y - (int)offset.Y;
 			theBottom = theTop + objectHeight;
 		}
+
+        public void SetFlipped(bool state)
+        {
+            if (state == true)
+            {
+                effects = SpriteEffects.FlipHorizontally;
+            }
+            else
+            {
+                effects = SpriteEffects.None;
+            }
+        }
+      
+        public void Pause()
+        {
+            animations[currentAnimation].Pause();
+        }
+
+        public void Play()
+        {
+            animations[currentAnimation].Play();
+        }
 
 
 	}

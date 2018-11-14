@@ -11,7 +11,7 @@ namespace CatAndMouse
 {
 	public class Collectable
 	{
-		public Sprite collectSprite = new Sprite();
+		/*public Sprite collectSprite = new Sprite();
 		Collision collision = new Collision();
 		MainGame game = null;
 
@@ -33,5 +33,5 @@ namespace CatAndMouse
 			collectSprite.UpdateHitBox();
 			
 		}
-	}
+	*/}
 }
