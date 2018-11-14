@@ -20,7 +20,7 @@ namespace CatAndMouse
         SpriteBatch spriteBatch;
 
         Player player = new Player();
-        //Enemy enemy = new Enemy();
+        Enemy enemy = new Enemy();
 
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
@@ -93,7 +93,7 @@ namespace CatAndMouse
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);
-            
+            enemy.Update(deltaTime);
 
 
             // TODO: Add your update logic here

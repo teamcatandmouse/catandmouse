@@ -63,7 +63,7 @@ namespace CatAndMouse
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spritebatch.Draw(texture, position + offset, Color.White);
+           // spriteBatch.Draw(texture, position + offset, Color.White);
             animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation], effects);
         }
 

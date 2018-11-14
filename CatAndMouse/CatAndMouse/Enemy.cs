@@ -15,18 +15,20 @@ namespace CatAndMouse
 
         Texture2D myTexture;
 
-        //float walkSpeed = 7500f;       
-        Vector2 enemyVelocity = new Vector2(0, 0);
-        Vector2 enemyOffset = new Vector2(0, 0);
-
-
+        float walkSpeed = 300f;       
+        
         Collision collisions = new Collision();
         MainGame game = null;
 
         public void Load(ContentManager content, MainGame game)
         {
-            enemySprite.Load(content, "WCat", true);
+            //enemySprite.Load(content, "WCat", true);
             this.game = game;
+
+            AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
+            animation.Load(content, "WCat", 1, 0);
+            enemySprite.AddAnimation(animation, 0, 1);
+            enemySprite.Pause();
 
             enemySprite.velocity = Vector2.Zero;
             enemySprite.position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, 2);       
@@ -35,11 +37,9 @@ namespace CatAndMouse
 
         public void Update(float deltaTime)
         {
-           // enemySprite.velocity = new Vector2(walkSpeed, 0) * deltaTime;
+            enemySprite.velocity = new Vector2(0, walkSpeed);
+
             enemySprite.position += enemySprite.velocity * deltaTime;
-
-
-
 
             enemySprite.Update(deltaTime);
             enemySprite.UpdateHitBox();
