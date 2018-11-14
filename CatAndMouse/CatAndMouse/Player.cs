@@ -20,7 +20,7 @@ namespace CatAndMouse
         float playerSpeed = 12500f;
         //float playerMaxSpeed = 400f;
        // float playerCurrentSpeed = 0f;
-        Vector2 playerPosition = new Vector2(0, 0);
+        public Vector2 playerPosition = new Vector2(0, 0);
         Vector2 playerVelocity = new Vector2(0, 0);
         Vector2 playerOffset = new Vector2(0, 0);
         bool playerAlive = false;
@@ -33,6 +33,11 @@ namespace CatAndMouse
         public void Load(ContentManager content, MainGame theGame)
         {
             playerSprite.Load(content, "Mouse", true);
+            AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
+            animation.Load(content, "M_WalkRight", 3, 5);
+            playerSprite.AddAnimation(animation, 0, 1);
+            playerSprite.Pause();
+
             game = theGame;
 
             playerSprite.velocity = Vector2.Zero;
@@ -60,7 +65,8 @@ namespace CatAndMouse
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up) == true)
             {
-                localAcceleration.Y = -playerSpeed;
+
+                localAcceleration.Y = -playerSpeed;                                            
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
             {
@@ -69,11 +75,21 @@ namespace CatAndMouse
             if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
             {
                 localAcceleration.X = -playerSpeed;
+                playerSprite.SetFlipped(true);
+                playerSprite.Play();
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
             {
+
                 localAcceleration.X = playerSpeed;
+                playerSprite.SetFlipped(false);
+                playerSprite.Play();
             }
+            if (Keyboard.GetState().IsKeyUp(Keys.Right) == true && Keyboard.GetState().IsKeyUp(Keys.Left) == true)
+            {
+                playerSprite.Pause();
+            }
+
 
             playerSprite.velocity = localAcceleration * deltaTime;
             playerSprite.position += playerSprite.velocity * deltaTime;
