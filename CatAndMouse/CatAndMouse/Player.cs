@@ -16,6 +16,8 @@ namespace CatAndMouse
     {
         public Sprite playerSprite = new Sprite();
 
+        Collision collision = new Collision();
+
         MainGame game = null;
         float playerSpeed = 12500f;
         //float playerMaxSpeed = 400f;
@@ -52,6 +54,8 @@ namespace CatAndMouse
             UpdateInput(deltaTime);
             playerSprite.Update(deltaTime);
             playerSprite.UpdateHitBox();
+
+            playerSprite = collision.CollideWithObject(playerSprite, game.enemy.enemySprite, game);
         }
 
         public void Draw(SpriteBatch spriteBatch)

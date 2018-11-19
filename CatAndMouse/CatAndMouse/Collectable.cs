@@ -13,9 +13,9 @@ namespace CatAndMouse
 	{
 		public Sprite collectSprite = new Sprite();
 		Collision collision = new Collision();
-		Game1 game = null;
+		MainGame game = null;
 
-		public void Load(ContentManager content, Game1 theGame)
+		public void Load(ContentManager content, MainGame theGame)
 		{
 			game = theGame;
 
@@ -23,7 +23,9 @@ namespace CatAndMouse
 			animation.Load(content, "Cheese", 1, 1);
 
 			collectSprite.AddAnimation(animation, 0, 3);
-		}
+
+            collectSprite.isCollectable = true;
+        }
 
 		public void Draw(SpriteBatch spriteBatch)
 		{

@@ -31,7 +31,11 @@ namespace CatAndMouse
 
         SpriteEffects effects = SpriteEffects.None;
 
-		public Sprite()
+        public bool isEnemy = false;
+        public bool isCollectable = false;
+
+
+        public Sprite()
 		{
 
 		}
