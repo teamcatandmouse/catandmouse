@@ -13,14 +13,16 @@ namespace CatAndMouse
 	{
 		public Sprite collectSprite = new Sprite();
 		Collision collision = new Collision();
-		MainGame game = null;
+		Game1 game = null;
 
-		public void Load(ContentManager content, MainGame theGame)
+		public void Load(ContentManager content, Game1 theGame)
 		{
-			collectSprite.Load(content, "Cheese", true);
 			game = theGame;
 
-			
+			AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
+			animation.Load(content, "Cheese", 1, 1);
+
+			collectSprite.AddAnimation(animation, 0, 3);
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
@@ -31,7 +33,6 @@ namespace CatAndMouse
 		{
 			collision.game = game;
 			collectSprite.UpdateHitBox();
-			
 		}
 	}
 }
