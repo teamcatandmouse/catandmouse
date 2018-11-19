@@ -59,8 +59,14 @@ namespace CatAndMouse
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            AIE.StateManager.CreateState("SPLASH", new SplashState());
+            AIE.StateManager.CreateState("GAME", new SplashState());
+            AIE.StateManager.CreateState("GAMEOVER", new SplashState());
+
+            AIE.StateManager.PushState("SPLASH");
 
             player.Load(Content, this);
             enemy.Load(Content, this);
@@ -71,7 +77,7 @@ namespace CatAndMouse
             map = Content.Load<TiledMap>("Level");
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            
         }
 
         /// <summary>
@@ -92,6 +98,8 @@ namespace CatAndMouse
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            AIE.StateManager.Update(Content, gameTime);
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);
@@ -117,7 +125,7 @@ namespace CatAndMouse
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            AIE.StateManager.Draw(spriteBatch);
 
             spriteBatch.Begin();
             mapRenderer.Draw(map);           

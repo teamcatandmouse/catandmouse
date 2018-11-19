@@ -45,10 +45,13 @@
     <Compile Include="Collectable.cs" />
     <Compile Include="Collision.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="GameOver.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplashState.cs" />
     <Compile Include="StateManager.cs" />
     <Compile Include="Sprite.cs" />
   </ItemGroup>

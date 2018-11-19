@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-namespace Platformer
+namespace CatAndMouse
 {
    public class SplashState : AIE.State
    {
