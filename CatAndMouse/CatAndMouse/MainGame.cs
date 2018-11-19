@@ -22,7 +22,7 @@ namespace CatAndMouse
         SpriteBatch spriteBatch;
 
         Player player = new Player();
-       public Enemy enemy = new Enemy();
+        Enemy enemy = new Enemy();
 
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
@@ -105,12 +105,12 @@ namespace CatAndMouse
             player.Update(deltaTime);
             enemy.Update(deltaTime);
 
-            /*
+
 			foreach (Collectable Cheese in collectables)
 			{
 				Cheese.Update(deltaTime);
 			}
-            */
+
 
 			// TODO: Add your update logic here
 
@@ -132,16 +132,16 @@ namespace CatAndMouse
 
             player.Draw(spriteBatch);
             enemy.Draw(spriteBatch);
-            /*
+
 			foreach (Collectable Cheese in collectables)
 			{
 				Cheese.Draw(spriteBatch);
 			}
-            */
+
 
 			//spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
 			spriteBatch.End();
-            /*
+
 			void LoadObjects()
 			{
 				foreach(TiledMapObjectLayer layer in map.ObjectLayers)
@@ -162,7 +162,7 @@ namespace CatAndMouse
 				}
 
 			}
-            */
+
 
             base.Draw(gameTime);
         }

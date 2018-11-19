@@ -15,11 +15,10 @@ namespace CatAndMouse
 
         Texture2D myTexture;
 
-        float walkSpeed = 30f;       
+        float walkSpeed = 300f;       
         
         Collision collisions = new Collision();
         MainGame game = null;
-        
 
         public void Load(ContentManager content, MainGame game)
         {
@@ -32,9 +31,7 @@ namespace CatAndMouse
             enemySprite.Pause();
 
             enemySprite.velocity = Vector2.Zero;
-            enemySprite.position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, 2);
-
-            enemySprite.isEnemy = false;
+            enemySprite.position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, 2);       
 
         }
 
