@@ -4,8 +4,10 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Graphics;
-using System;
+using MonoGame.Extended.ViewportAdapters;
 using System.Collections;
+using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 
 
 
@@ -96,9 +98,15 @@ namespace CatAndMouse
             enemy.Update(deltaTime);
 
 
-            // TODO: Add your update logic here
+			foreach (Collectable Cheese in collectables)
+			{
+				Cheese.Update(deltaTime);
+			}
 
-            base.Update(gameTime);
+
+			// TODO: Add your update logic here
+
+			base.Update(gameTime);
         }
 
         /// <summary>
@@ -117,8 +125,35 @@ namespace CatAndMouse
             player.Draw(spriteBatch);
             enemy.Draw(spriteBatch);
 
-            //spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
-            spriteBatch.End();
+			foreach (Collectable Cheese in collectables)
+			{
+				Cheese.Draw(spriteBatch);
+			}
+
+
+			//spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
+			spriteBatch.End();
+
+			void LoadObjects()
+			{
+				foreach(TiledMapObjectLayer layer in map.ObjectLayers)
+				{
+					if (layer.Name == "Collectable")
+					{
+
+						foreach (TiledMapObject thing in layer.Objects)
+						{
+							Collectable collectable = new Collectable();
+							Vector2 tiles = new Vector2((int)(thing.Position.X / tileHeight), (int)(thing.Position.Y / tileHeight));
+							collect.collectSprite.position = tiles * tileHeight;
+							collect.Load(Content, this);
+							collectables.Add(collect);
+						}
+
+					}
+				}
+
+			}
 
 
             base.Draw(gameTime);
