@@ -5,16 +5,30 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatAndMouse", "CatAndMouse\CatAndMouse.csproj", "{B2053354-34C2-40B5-8250-573BFA1A91A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGameContentPipelineExtension1", "MonoGameContentPipelineExtension1\MonoGameContentPipelineExtension1.csproj", "{BF0CB212-AEE6-4E75-B97F-633621EFBE06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2053354-34C2-40B5-8250-573BFA1A91A4}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{B2053354-34C2-40B5-8250-573BFA1A91A4}.Debug|x86.ActiveCfg = Debug|x86
 		{B2053354-34C2-40B5-8250-573BFA1A91A4}.Debug|x86.Build.0 = Debug|x86
+		{B2053354-34C2-40B5-8250-573BFA1A91A4}.Release|Any CPU.ActiveCfg = Release|x86
 		{B2053354-34C2-40B5-8250-573BFA1A91A4}.Release|x86.ActiveCfg = Release|x86
 		{B2053354-34C2-40B5-8250-573BFA1A91A4}.Release|x86.Build.0 = Release|x86
+		{BF0CB212-AEE6-4E75-B97F-633621EFBE06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0CB212-AEE6-4E75-B97F-633621EFBE06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0CB212-AEE6-4E75-B97F-633621EFBE06}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF0CB212-AEE6-4E75-B97F-633621EFBE06}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF0CB212-AEE6-4E75-B97F-633621EFBE06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0CB212-AEE6-4E75-B97F-633621EFBE06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF0CB212-AEE6-4E75-B97F-633621EFBE06}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF0CB212-AEE6-4E75-B97F-633621EFBE06}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
