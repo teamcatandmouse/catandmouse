@@ -22,7 +22,7 @@ namespace CatAndMouse
         SpriteBatch spriteBatch;
 
         Player player = new Player();
-       public Enemy enemy = new Enemy();
+        public Enemy enemy = new Enemy();
 
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
@@ -30,6 +30,8 @@ namespace CatAndMouse
 
         SpriteFont scoreFont;
         public int score = 0;
+        public int lives = 3;
+        Texture2D heart = null;
 
         public MainGame()
         {
@@ -74,6 +76,8 @@ namespace CatAndMouse
             //scoreFont = Content.Load<SpriteFont>("Score");
 
 
+            scoreFont = Content.Load<SpriteFont>("Arial");
+            heart = Content.Load<Texture2D>("Heart");
             map = Content.Load<TiledMap>("Level");
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
@@ -139,7 +143,17 @@ namespace CatAndMouse
 			}
             */
 
-			//spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
+			spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
+
+            int loopCount = 0;
+
+            while (loopCount < lives)
+            {
+                spriteBatch.Draw(heart, new Vector2(GraphicsDevice.Viewport.Width - 70 - loopCount * 69, 23),
+                    Color.White);
+
+                loopCount++;
+            }
 			spriteBatch.End();
             /*
 			void LoadObjects()
