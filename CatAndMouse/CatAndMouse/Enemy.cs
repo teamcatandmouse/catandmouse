@@ -32,9 +32,9 @@ namespace CatAndMouse
             enemySprite.Pause();
 
             enemySprite.velocity = Vector2.Zero;
-            enemySprite.position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, 2);
+            enemySprite.position = new Vector2(game.GraphicsDevice.Viewport.Width / 28, 35);
 
-            enemySprite.isEnemy = false;
+            enemySprite.isEnemy = true;
 
         }
 
