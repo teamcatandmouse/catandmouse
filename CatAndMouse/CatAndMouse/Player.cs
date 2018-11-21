@@ -14,11 +14,12 @@ namespace CatAndMouse
 {
    class Player
     {
-        
         public Sprite playerSprite = new Sprite();
 
         MainGame game = null;
         float playerSpeed = 12500f;
+        //float playerMaxSpeed = 400f;
+       // float playerCurrentSpeed = 0f;
         public Vector2 playerPosition = new Vector2(0, 0);
         Vector2 playerVelocity = new Vector2(0, 0);
         Vector2 playerOffset = new Vector2(0, 0);
@@ -40,7 +41,9 @@ namespace CatAndMouse
             game = theGame;
 
             playerSprite.velocity = Vector2.Zero;
-            playerSprite.position = new Vector2(322, 280);
+
+            playerSprite.velocity = Vector2.Zero;
+            playerSprite.position = new Vector2(theGame.GraphicsDevice.Viewport.Width / 2, 0);
            
         }
 
