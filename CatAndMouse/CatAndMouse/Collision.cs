@@ -9,7 +9,7 @@ namespace CatAndMouse
 {
     class Collision
     {
-        public MainGame game;
+        public MainGame game;    
         
         
 
@@ -33,7 +33,7 @@ namespace CatAndMouse
            {
                 if (other.isEnemy == true)
                 {
-                    theGame.Exit;
+                    game.Exit();
                 }
                 else if (other.isCollectable == true)
                 {
