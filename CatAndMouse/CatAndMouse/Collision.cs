@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace CatAndMouse
 {
     class Collision
     {
-        public MainGame game;    
-        
+        public MainGame game;
+
         
 
 
@@ -46,7 +47,31 @@ namespace CatAndMouse
                
         }
 
+        
 
 
+
+
+       /*
+        Sprite CollideLeft(Sprite hero, MainGame game)
+        {
+            
+        }
+
+        Sprite CollideRight(Sprite hero, MainGame game)
+        {
+
+        }
+
+        Sprite CollideTop(Sprite hero, MainGame game)
+        {
+
+        }
+
+        Sprite CollideBottom(Sprite hero, MainGame game)
+        {
+
+        }
+        */
     }
 }
