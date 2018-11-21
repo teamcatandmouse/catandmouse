@@ -31,7 +31,11 @@ namespace CatAndMouse
 
         SpriteEffects effects = SpriteEffects.None;
 
-		public Sprite()
+        public bool isEnemy = false;
+        public bool isCollectable = false;
+
+
+        public Sprite()
 		{
 
 		}
@@ -63,7 +67,7 @@ namespace CatAndMouse
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spritebatch.Draw(texture, position + offset, Color.White);
+           // spriteBatch.Draw(texture, position + offset, Color.White);
             animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation], effects);
         }
 

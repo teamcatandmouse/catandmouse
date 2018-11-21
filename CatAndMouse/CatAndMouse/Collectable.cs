@@ -15,12 +15,29 @@ namespace CatAndMouse
 		Collision collision = new Collision();
 		MainGame game = null;
 
+		public float despawnTimer = 5.0f;
+		public int cheeseNumber = 0;
+
 		public void Load(ContentManager content, MainGame theGame)
 		{
-			collectSprite.Load(content, "Cheese", true);
 			game = theGame;
 
-			
+			AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
+			animation.Load(content, "Cheese", 1, 1);
+
+			collectSprite.AddAnimation(animation, 0, 3);
+
+            collectSprite.isCollectable = true;
+
+			Random random = new Random();
+			float positionX = new float();
+			float positionY = new float();
+
+			positionX = random.Next(0, game.GraphicsDevice.Viewport.Width);
+			positionY = random.Next(0, game.GraphicsDevice.Viewport.Height);
+
+			collectSprite.position = new Vector2(positionX, positionY);
+
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
@@ -31,7 +48,13 @@ namespace CatAndMouse
 		{
 			collision.game = game;
 			collectSprite.UpdateHitBox();
-			
+
+			despawnTimer -= deltaTime;
+
+			if (despawnTimer <= 0)
+			{
+
+			}
 		}
 	}
 }

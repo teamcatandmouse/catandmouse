@@ -4,8 +4,10 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Graphics;
-using System;
+using MonoGame.Extended.ViewportAdapters;
 using System.Collections;
+using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 
 
 
@@ -20,6 +22,7 @@ namespace CatAndMouse
         SpriteBatch spriteBatch;
 
         Player player = new Player();
+       public Enemy enemy = new Enemy();
 
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
@@ -56,10 +59,17 @@ namespace CatAndMouse
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            AIE.StateManager.CreateState("SPLASH", new SplashState());
+            AIE.StateManager.CreateState("GAME", new SplashState());
+            AIE.StateManager.CreateState("GAMEOVER", new SplashState());
+
+            AIE.StateManager.PushState("SPLASH");
+
             player.Load(Content, this);
+            enemy.Load(Content, this);
 
             //scoreFont = Content.Load<SpriteFont>("Score");
 
@@ -67,7 +77,7 @@ namespace CatAndMouse
             map = Content.Load<TiledMap>("Level");
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            
         }
 
         /// <summary>
@@ -89,13 +99,22 @@ namespace CatAndMouse
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            AIE.StateManager.Update(Content, gameTime);
+
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);
+            enemy.Update(deltaTime);
 
+            /*
+			foreach (Collectable Cheese in collectables)
+			{
+				Cheese.Update(deltaTime);
+			}
+            */
 
-            // TODO: Add your update logic here
+			// TODO: Add your update logic here
 
-            base.Update(gameTime);
+			base.Update(gameTime);
         }
 
         /// <summary>
@@ -106,16 +125,44 @@ namespace CatAndMouse
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            AIE.StateManager.Draw(spriteBatch);
 
             spriteBatch.Begin();
             mapRenderer.Draw(map);           
 
             player.Draw(spriteBatch);
+            enemy.Draw(spriteBatch);
+            /*
+			foreach (Collectable Cheese in collectables)
+			{
+				Cheese.Draw(spriteBatch);
+			}
+            */
 
-            //spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
-            spriteBatch.End();
+			//spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
+			spriteBatch.End();
+            /*
+			void LoadObjects()
+			{
+				foreach(TiledMapObjectLayer layer in map.ObjectLayers)
+				{
+					if (layer.Name == "Collectable")
+					{
 
+						foreach (TiledMapObject thing in layer.Objects)
+						{
+							Collectable collectable = new Collectable();
+							Vector2 tiles = new Vector2((int)(thing.Position.X / tileHeight), (int)(thing.Position.Y / tileHeight));
+							collect.collectSprite.position = tiles * tileHeight;
+							collect.Load(Content, this);
+							collectables.Add(collect);
+						}
+
+					}
+				}
+
+			}
+            */
 
             base.Draw(gameTime);
         }
