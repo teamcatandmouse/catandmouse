@@ -40,8 +40,7 @@ namespace CatAndMouse
                 }
                 else if (other.isCollectable == true)
                 {
-					theGame.collectables.Remove(cheese);
-					theGame.score += 10;
+
 				}
            }
 
@@ -79,21 +78,21 @@ namespace CatAndMouse
 
 		public Sprite CollideWithCollect(Player cheese, Collectable collect, float deltaTime, MainGame theGame)
 		{
-			sprite playerPrediction = new Sprite();
-			playerPrediction.position = hero.playerSprite.position;
-			playerPrediction.width = hero.playerSprite.width;
-			playerPrediction.height = hero.playerSprite.height;
-			playerPrediction.offset = hero.playerSprite.offset;
+			Sprite playerPrediction = new Sprite();
+			playerPrediction.position = cheese.playerSprite.position;
+			playerPrediction.objectWidth = cheese.playerSprite.objectWidth;
+			playerPrediction.objectHeight = cheese.playerSprite.objectHeight;
+			playerPrediction.offset = cheese.playerSprite.offset;
 			playerPrediction.UpdateHitBox();
 
-			playerPrediction.position += hero.playerSprite.velocity * deltaTime;
+			playerPrediction.position += cheese.playerSprite.velocity * deltaTime;
 			if (IsColliding(playerPrediction, collect.collectSprite))
 			{
-				theGame.collectables.Remove(collect);
+				theGame.collectable.Remove(collect);
 				theGame.score += 10;
 
 			}
-			return hero.playerSprite;
+			return cheese.playerSprite;
 		}
 
 	}

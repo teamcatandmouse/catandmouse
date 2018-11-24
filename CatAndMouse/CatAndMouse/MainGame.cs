@@ -33,6 +33,13 @@ namespace CatAndMouse
         public int lives = 3;
         Texture2D heart = null;
 
+		Collectable[] collectables;
+
+		public float cheeseSpawnTimer = 6.0f;
+		float cheeseSpawnDefaultTime = 6.0f;
+
+		ArrayList Collectables = new ArrayList();
+
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -72,6 +79,7 @@ namespace CatAndMouse
 
             player.Load(Content, this);
             enemy.Load(Content, this);
+			collectable.Load(Content, this);
 
             //scoreFont = Content.Load<SpriteFont>("Score");
 
@@ -108,6 +116,8 @@ namespace CatAndMouse
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);
             enemy.Update(deltaTime);
+
+			CheckForCheeseSpawn();
 
             /*
 			foreach (Collectable Cheese in collectables)
@@ -155,31 +165,27 @@ namespace CatAndMouse
                 loopCount++;
             }
 			spriteBatch.End();
-            /*
-			void LoadObjects()
-			{
-				foreach(TiledMapObjectLayer layer in map.ObjectLayers)
-				{
-					if (layer.Name == "Collectable")
-					{
-
-						foreach (TiledMapObject thing in layer.Objects)
-						{
-							Collectable collectable = new Collectable();
-							Vector2 tiles = new Vector2((int)(thing.Position.X / tileHeight), (int)(thing.Position.Y / tileHeight));
-							collect.collectSprite.position = tiles * tileHeight;
-							collect.Load(Content, this);
-							collectables.Add(collect);
-						}
-
-					}
-				}
-
-			}
-            */
+           
 
             base.Draw(gameTime);
         }
+
+		void CheckForCheeseSpawn(float deltaTime)
+		{
+			cheeseSpawnTimer -= deltaTime;
+
+			if (cheeseSpawnTimer <= 0)
+			{
+				Collectable cheese = new Collectable();
+
+				cheese.Load(Content, this);
+
+				collectables.Add(cheese);
+
+				cheeseSpawnTimer = cheeseSpawnDefaultTime;
+			}
+			
+		}
 
     }
 }

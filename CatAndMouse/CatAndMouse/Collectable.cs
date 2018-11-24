@@ -30,13 +30,12 @@ namespace CatAndMouse
             collectSprite.isCollectable = true;
 
 			Random random = new Random();
-			float positionX = new float();
-			float positionY = new float();
+			
 
-			positionX = random.Next(0, game.GraphicsDevice.Viewport.Width);
-			positionY = random.Next(0, game.GraphicsDevice.Viewport.Height);
+			 random.Next(0, game.GraphicsDevice.Viewport.Width);
 
-			collectSprite.position = new Vector2(positionX, positionY);
+
+			collectSprite.position = random;
 
 		}
 
