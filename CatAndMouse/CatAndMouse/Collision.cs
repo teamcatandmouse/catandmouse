@@ -30,7 +30,9 @@ namespace CatAndMouse
 
         public Sprite CollideWithObject(Sprite hero, Sprite other, MainGame game)
         {
-           if  (IsColliding(hero, other))
+			Sprite playerPrediction = new Sprite();
+
+			if  (IsColliding(hero, other))
            {
                 if (other.isEnemy == true)
                 {
@@ -38,8 +40,9 @@ namespace CatAndMouse
                 }
                 else if (other.isCollectable == true)
                 {
-
-                }
+					theGame.collectables.Remove(cheese);
+					theGame.score += 10;
+				}
            }
 
             return hero;
@@ -47,31 +50,51 @@ namespace CatAndMouse
                
         }
 
-        
 
 
 
 
-       /*
-        Sprite CollideLeft(Sprite hero, MainGame game)
-        {
-            
-        }
 
-        Sprite CollideRight(Sprite hero, MainGame game)
-        {
+		/*
+		 Sprite CollideLeft(Sprite hero, MainGame game)
+		 {
 
-        }
+		 }
 
-        Sprite CollideTop(Sprite hero, MainGame game)
-        {
+		 Sprite CollideRight(Sprite hero, MainGame game)
+		 {
 
-        }
+		 }
 
-        Sprite CollideBottom(Sprite hero, MainGame game)
-        {
+		 Sprite CollideTop(Sprite hero, MainGame game)
+		 {
 
-        }
-        */
-    }
+		 }
+
+		 Sprite CollideBottom(Sprite hero, MainGame game)
+		 {
+
+		 }
+		 */
+
+		public Sprite CollideWithCollect(Player cheese, Collectable collect, float deltaTime, MainGame theGame)
+		{
+			sprite playerPrediction = new Sprite();
+			playerPrediction.position = hero.playerSprite.position;
+			playerPrediction.width = hero.playerSprite.width;
+			playerPrediction.height = hero.playerSprite.height;
+			playerPrediction.offset = hero.playerSprite.offset;
+			playerPrediction.UpdateHitBox();
+
+			playerPrediction.position += hero.playerSprite.velocity * deltaTime;
+			if (IsColliding(playerPrediction, collect.collectSprite))
+			{
+				theGame.collectables.Remove(collect);
+				theGame.score += 10;
+
+			}
+			return hero.playerSprite;
+		}
+
+	}
 }

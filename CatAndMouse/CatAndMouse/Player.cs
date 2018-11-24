@@ -56,7 +56,13 @@ namespace CatAndMouse
             playerSprite.UpdateHitBox();
 
             playerSprite = collision.CollideWithObject(playerSprite, game.enemy.enemySprite, game);
-        }
+
+
+			for (int i = 0; i < game.collectables.Count; i++)
+			{
+				playerSprite = collision.CollideWithCollect(this, game.collectables[i], deltaTime, game);
+			}
+		}
 
         public void Draw(SpriteBatch spriteBatch)
         {
