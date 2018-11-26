@@ -33,12 +33,12 @@ namespace CatAndMouse
         public int lives = 3;
         Texture2D heart = null;
 
-		Collectable[] collectables;
+		
 
 		public float cheeseSpawnTimer = 6.0f;
 		float cheeseSpawnDefaultTime = 6.0f;
 
-		ArrayList Collectables = new ArrayList();
+		public ArrayList collectables = new ArrayList();
 
         public MainGame()
         {
@@ -79,7 +79,7 @@ namespace CatAndMouse
 
             player.Load(Content, this);
             enemy.Load(Content, this);
-			collectable.Load(Content, this);
+			//collectable.Load(Content, this);
 
             //scoreFont = Content.Load<SpriteFont>("Score");
 
@@ -117,14 +117,14 @@ namespace CatAndMouse
             player.Update(deltaTime);
             enemy.Update(deltaTime);
 
-			CheckForCheeseSpawn();
+			CheckForCheeseSpawn(deltaTime);
 
-            /*
+            
 			foreach (Collectable Cheese in collectables)
 			{
 				Cheese.Update(deltaTime);
 			}
-            */
+            
 
 			// TODO: Add your update logic here
 
@@ -146,12 +146,12 @@ namespace CatAndMouse
 
             player.Draw(spriteBatch);
             enemy.Draw(spriteBatch);
-            /*
+            
 			foreach (Collectable Cheese in collectables)
 			{
 				Cheese.Draw(spriteBatch);
 			}
-            */
+            
 
 			spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
 

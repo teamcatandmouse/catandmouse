@@ -88,7 +88,7 @@ namespace CatAndMouse
 			playerPrediction.position += cheese.playerSprite.velocity * deltaTime;
 			if (IsColliding(playerPrediction, collect.collectSprite))
 			{
-				theGame.collectable.Remove(collect);
+				theGame.collectables.Remove(collect);
 				theGame.score += 10;
 
 			}

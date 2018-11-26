@@ -32,10 +32,11 @@ namespace CatAndMouse
 			Random random = new Random();
 			
 
-			 random.Next(0, game.GraphicsDevice.Viewport.Width);
+			float RandomX = random.Next(0, game.GraphicsDevice.Viewport.Width);
+			float RandomY = random.Next(0, game.GraphicsDevice.Viewport.Height);
 
 
-			collectSprite.position = random;
+			collectSprite.position = new Vector2(RandomX, RandomY) ;
 
 		}
 

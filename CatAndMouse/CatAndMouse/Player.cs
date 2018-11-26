@@ -60,7 +60,7 @@ namespace CatAndMouse
             /*
 			for (int i = 0; i < game.collectables.Count; i++)
 			{
-				playerSprite = collision.CollideWithCollect(this, game.collectables[i], deltaTime, game);
+				playerSprite = collision.CollideWithCollect(this,(Collectable) game.collectables[i], deltaTime, game);
 			}
             */
 		}
