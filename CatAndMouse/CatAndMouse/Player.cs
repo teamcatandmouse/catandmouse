@@ -56,7 +56,14 @@ namespace CatAndMouse
             playerSprite.UpdateHitBox();
 
             playerSprite = collision.CollideWithObject(playerSprite, game.enemy.enemySprite, game);
-        }
+
+            /*
+			for (int i = 0; i < game.collectables.Count; i++)
+			{
+				playerSprite = collision.CollideWithCollect(this,(Collectable) game.collectables[i], deltaTime, game);
+			}
+            */
+		}
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -97,6 +104,24 @@ namespace CatAndMouse
 
             playerSprite.velocity = localAcceleration * deltaTime;
             playerSprite.position += playerSprite.velocity * deltaTime;
+
+            if (playerSprite.position.X <= 0)
+            {
+                playerSprite.position.X = 0;
+            }
+            if (playerSprite.position.X + playerSprite.objectWidth >= game.GraphicsDevice.Viewport.Width)
+            {
+                playerSprite.position.X = game.GraphicsDevice.Viewport.Width - playerSprite.objectWidth;
+            }
+            if (playerSprite.position.Y <= 0)
+            {
+                playerSprite.position.Y = 0;
+            }
+            if (playerSprite.position.Y + playerSprite.objectHeight >= game.GraphicsDevice.Viewport.Height)
+            {
+                playerSprite.position.Y = game.GraphicsDevice.Viewport.Height - playerSprite.objectHeight;
+            }
+
 
         }
 
