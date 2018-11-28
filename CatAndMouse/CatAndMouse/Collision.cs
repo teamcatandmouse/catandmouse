@@ -50,32 +50,6 @@ namespace CatAndMouse
         }
 
 
-
-
-
-
-		/*
-		 Sprite CollideLeft(Sprite hero, MainGame game)
-		 {
-
-		 }
-
-		 Sprite CollideRight(Sprite hero, MainGame game)
-		 {
-
-		 }
-
-		 Sprite CollideTop(Sprite hero, MainGame game)
-		 {
-
-		 }
-
-		 Sprite CollideBottom(Sprite hero, MainGame game)
-		 {
-
-		 }
-		 */
-
 		public Sprite CollideWithCollect(Player cheese, Collectable collect, float deltaTime, MainGame theGame)
 		{
 			Sprite playerPrediction = new Sprite();
