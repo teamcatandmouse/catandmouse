@@ -8,6 +8,8 @@ using MonoGame.Extended.ViewportAdapters;
 using System.Collections;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
+using System;
+
 
 
 
@@ -35,10 +37,11 @@ namespace CatAndMouse
 
 		
 
-		public float cheeseSpawnTimer = 6.0f;
-		float cheeseSpawnDefaultTime = 6.0f;
+		public float collectableSpawnTimer = 6.0f;
+		float collectableSpawnDefaultTime = 6.0f;
 
 		public ArrayList collectables = new ArrayList();
+		
 
         public MainGame()
         {
@@ -117,7 +120,7 @@ namespace CatAndMouse
             player.Update(deltaTime);
             enemy.Update(deltaTime);
 
-			CheckForCheeseSpawn(deltaTime);
+			CheckForCollectableSpawn(deltaTime);
 
             
 			foreach (Collectable Cheese in collectables)
@@ -170,19 +173,19 @@ namespace CatAndMouse
             base.Draw(gameTime);
         }
 
-		void CheckForCheeseSpawn(float deltaTime)
+		void CheckForCollectableSpawn(float deltaTime)
 		{
-			cheeseSpawnTimer -= deltaTime;
+			collectableSpawnTimer -= deltaTime;
 
-			if (cheeseSpawnTimer <= 0)
+			if (collectableSpawnTimer <= 0)
 			{
-				Collectable cheese = new Collectable();
+				Random rand = new Random();
+				int randomCollect = rand.Next(1, 5);
 
-				cheese.Load(Content, this);
+				switch (randomCollect)
+				{
 
-				collectables.Add(cheese);
-
-				cheeseSpawnTimer = cheeseSpawnDefaultTime;
+				}
 			}
 			
 		}

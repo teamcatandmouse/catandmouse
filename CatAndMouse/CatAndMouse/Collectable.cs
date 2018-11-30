@@ -18,12 +18,39 @@ namespace CatAndMouse
 		public float despawnTimer = 5.0f;
 		public int cheeseNumber = 0;
 
+		public enum CollectableType { cheese = 1, SloMo = 2, extraLife = 3, fasterPlayer = 4, moreCheese = 5 }
+		public int collectableType;
+
 		public void Load(ContentManager content, MainGame theGame)
 		{
 			game = theGame;
 
 			AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-			animation.Load(content, "Cheese", 1, 1);
+			switch (collectableType)
+			{
+				case (int)CollectableType.cheese:
+					animation.Load(content, "Cheese", 1, 1);
+					break;
+
+				case (int)CollectableType.extraLife:
+					animation.Load(content, "PU_Life", 1, 1);
+					break;
+
+				case (int)CollectableType.fasterPlayer:
+					animation.Load(content, "PU_Multiplier", 1, 1);
+					break;
+
+				case (int)CollectableType.moreCheese:
+					animation.Load(content, "PU_Cheese", 1, 1);
+					break;
+
+
+				case (int)CollectableType.SloMo:
+					animation.Load(content, "PU_Cats", 1, 1);
+					break;
+			}
+
+			
 
 			collectSprite.AddAnimation(animation, 0, 3);
 
