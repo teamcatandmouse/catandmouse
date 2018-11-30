@@ -45,7 +45,7 @@ namespace CatAndMouse
             playerSprite.velocity = Vector2.Zero;
 
             playerSprite.velocity = Vector2.Zero;
-            playerSprite.position = new Vector2(theGame.GraphicsDevice.Viewport.Width / 2, 0);
+            playerSprite.position = new Vector2(theGame.GraphicsDevice.Viewport.Width / 2, theGame.GraphicsDevice.Viewport.Height / 2);
            
         }
 
@@ -55,12 +55,12 @@ namespace CatAndMouse
             playerSprite.Update(deltaTime);
             playerSprite.UpdateHitBox();
 
-            playerSprite = collision.CollideWithObject(playerSprite, game.enemy.enemySprite, game);
+            playerSprite = collision.CollideWithObject(playerSprite, game.cat.enemy.enemySprite, game);
 
             
 			for (int i = 0; i < game.collectables.Count; i++)
 			{
-				playerSprite = collision.CollideWithCollect(this,(Collectable) game.collectables[i], deltaTime, game);
+				playerSprite = collision.CollideWithCollect(this, game.collectables[i], deltaTime, game);
 			}
             
 		}

@@ -13,9 +13,10 @@ namespace CatAndMouse
     {
         public Sprite enemySprite = new Sprite();
 
-        Texture2D myTexture;
+        public String myTexture;
 
-        float walkSpeed = 30f;       
+        public float xwalkSpeed = 0f;
+        public float ywalkSpeed = 0f;
         
         Collision collisions = new Collision();
         MainGame game = null;
@@ -27,12 +28,12 @@ namespace CatAndMouse
             this.game = game;
 
             AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-            animation.Load(content, "WCat", 1, 0);
+            animation.Load(content, myTexture, 1, 0);
             enemySprite.AddAnimation(animation, 0, 1);
             enemySprite.Pause();
 
             enemySprite.velocity = Vector2.Zero;
-            enemySprite.position = new Vector2(game.GraphicsDevice.Viewport.Width / 28, 35);
+            //enemySprite.position = new Vector2(game.GraphicsDevice.Viewport.Width / 200, 0);
 
             enemySprite.isEnemy = true;
 
@@ -40,7 +41,7 @@ namespace CatAndMouse
 
         public void Update(float deltaTime)
         {
-            enemySprite.velocity = new Vector2(0, walkSpeed);
+            enemySprite.velocity = new Vector2(xwalkSpeed, ywalkSpeed);
 
             enemySprite.position += enemySprite.velocity * deltaTime;
 

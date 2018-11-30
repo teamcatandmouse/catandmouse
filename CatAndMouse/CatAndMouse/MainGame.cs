@@ -24,7 +24,10 @@ namespace CatAndMouse
         SpriteBatch spriteBatch;
 
         Player player = new Player();
-        public Enemy enemy = new Enemy();
+        //public Enemy enemy = new Enemy();
+        public Cat cat = new Cat();
+        public CatSpawn catSpawn = new CatSpawn();
+
 
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
@@ -81,7 +84,8 @@ namespace CatAndMouse
             AIE.StateManager.PushState("SPLASH");
 
             player.Load(Content, this);
-            enemy.Load(Content, this);
+            cat.Load(Content, this);
+            catSpawn.Load(Content, this);
 			//collectable.Load(Content, this);
 
             //scoreFont = Content.Load<SpriteFont>("Score");
@@ -118,7 +122,14 @@ namespace CatAndMouse
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);
-            enemy.Update(deltaTime);
+            catSpawn.Update(deltaTime);
+
+            foreach(Cat cat in catSpawn.spawnedCats)
+            {
+                cat.Update(deltaTime);
+            }
+
+            //cat.Update(deltaTime);
 
 			CheckForCollectableSpawn(deltaTime);
 
@@ -148,7 +159,7 @@ namespace CatAndMouse
             mapRenderer.Draw(map);           
 
             player.Draw(spriteBatch);
-            enemy.Draw(spriteBatch);
+            cat.Draw(spriteBatch);
             
 			foreach (Collectable Cheese in collectables)
 			{
