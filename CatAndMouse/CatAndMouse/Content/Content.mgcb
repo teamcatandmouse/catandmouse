@@ -200,3 +200,9 @@
 /processorParam:Quality=Best
 /build:get.wav
 
+#begin fast_music.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:fast_music.mp3
+

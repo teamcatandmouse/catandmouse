@@ -32,6 +32,7 @@ namespace CatAndMouse
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
 
+		Song gameMusic;
 
         SpriteFont scoreFont;
         public int score = 0;
@@ -96,7 +97,9 @@ namespace CatAndMouse
             map = Content.Load<TiledMap>("Level");
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
-            
+
+			gameMusic = Content.Load<Song>("fast_music");
+			MediaPlayer.Play(gameMusic);
         }
 
         /// <summary>
