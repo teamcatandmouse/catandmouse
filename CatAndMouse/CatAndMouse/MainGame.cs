@@ -46,7 +46,7 @@ namespace CatAndMouse
 		public ArrayList collectables = new ArrayList();
 		
 
-        public MainGame()
+		public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

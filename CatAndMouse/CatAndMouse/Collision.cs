@@ -11,11 +11,11 @@ namespace CatAndMouse
     class Collision
     {
         public MainGame game;
+	
 
-        
 
 
-        public bool IsColliding(Sprite hero, Sprite otherSprite)
+		public bool IsColliding(Sprite hero, Sprite otherSprite)
         {
             if (hero.theRight < otherSprite.theLeft ||
                 hero.theLeft > otherSprite.theRight ||
@@ -50,23 +50,46 @@ namespace CatAndMouse
         }
 
 
-		public Sprite CollideWithCollect(Player cheese, Collectable collect, float deltaTime, MainGame theGame)
+		public Sprite CollideWithCollect(Player player, Collectable collect, float deltaTime, MainGame theGame)
 		{
 			Sprite playerPrediction = new Sprite();
-			playerPrediction.position = cheese.playerSprite.position;
-			playerPrediction.objectWidth = cheese.playerSprite.objectWidth;
-			playerPrediction.objectHeight = cheese.playerSprite.objectHeight;
-			playerPrediction.offset = cheese.playerSprite.offset;
+			playerPrediction.position = player.playerSprite.position;
+			playerPrediction.objectWidth = player.playerSprite.objectWidth;
+			playerPrediction.objectHeight = player.playerSprite.objectHeight;
+			playerPrediction.offset = player.playerSprite.offset;
 			playerPrediction.UpdateHitBox();
 
-			playerPrediction.position += cheese.playerSprite.velocity * deltaTime;
+			playerPrediction.position += player.playerSprite.velocity * deltaTime;
 			if (IsColliding(playerPrediction, collect.collectSprite))
 			{
-				theGame.collectables.Remove(collect);
-				theGame.score += 10;
+				if (collect.collectableType == (int)Collectable.CollectableType.cheese)
+				{
+					theGame.collectables.Remove(collect);
+					theGame.score += 10;
+				}
+
+				else if (collect.collectableType == (int)Collectable.CollectableType.SloMo)
+				{
+					theGame.collectables.Remove(collect);
+					
+				}
+
+				else if (collect.collectableType == (int)Collectable.CollectableType.extraLife)
+				{
+					theGame.collectables.Remove(collect);
+					theGame.lives += 1;
+					
+				}
+
+				else if (collect.collectableType == (int)Collectable.CollectableType.moreCheese)
+				{
+					theGame.collectables.Remove(collect);
+					theGame.score += 30;
+				}
+
 
 			}
-			return cheese.playerSprite;
+			return player.playerSprite;
 		}
 
 	}

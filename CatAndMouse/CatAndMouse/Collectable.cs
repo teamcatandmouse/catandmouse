@@ -18,7 +18,9 @@ namespace CatAndMouse
 		public float despawnTimer = 5.0f;
 		public int cheeseNumber = 0;
 
-		public enum CollectableType { cheese = 1, SloMo = 2, extraLife = 3, fasterPlayer = 4, moreCheese = 5 }
+		public enum CollectableType { cheese = 1, SloMo = 2, extraLife = 3, fasterPlayer = 4, moreCheese = 5, }
+			
+		
 		public int collectableType;
 
 		public void Load(ContentManager content, MainGame theGame)

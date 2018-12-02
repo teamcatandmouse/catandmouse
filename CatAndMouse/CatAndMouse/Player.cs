@@ -19,7 +19,7 @@ namespace CatAndMouse
         Collision collision = new Collision();
 
         MainGame game = null;
-        float playerSpeed = 12500f;
+        public float playerSpeed = 12500f;
         //float playerMaxSpeed = 400f;
        // float playerCurrentSpeed = 0f;
         public Vector2 playerPosition = new Vector2(0, 0);
@@ -60,7 +60,7 @@ namespace CatAndMouse
             
 			for (int i = 0; i < game.collectables.Count; i++)
 			{
-				playerSprite = collision.CollideWithCollect(this, game.collectables[i], deltaTime, game);
+				playerSprite = collision.CollideWithCollect(this,(Collectable) game.collectables[i], deltaTime, game);
 			}
             
 		}
