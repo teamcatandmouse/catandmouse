@@ -5,14 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 
 namespace CatAndMouse
 {
     class Collision
     {
         public MainGame game;
-	
 
+		SoundEffect getSound;
+		SoundEffectInstance getSoundInstance;
+
+
+		public void Load(ContentManager content, MainGame theGame)
+		{
+			getSound = content.Load<SoundEffect>("get");
+			getSoundInstance = getSound.CreateInstance();
+		}
+		
 
 
 		public bool IsColliding(Sprite hero, Sprite otherSprite)
@@ -66,25 +77,34 @@ namespace CatAndMouse
 				{
 					theGame.collectables.Remove(collect);
 					theGame.score += 10;
+					getSoundInstance.Play();
 				}
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.SloMo)
 				{
 					theGame.collectables.Remove(collect);
-					
+					getSoundInstance.Play();
 				}
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.extraLife)
 				{
 					theGame.collectables.Remove(collect);
 					theGame.lives += 1;
-					
+					getSoundInstance.Play();
 				}
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.moreCheese)
 				{
 					theGame.collectables.Remove(collect);
 					theGame.score += 30;
+					getSoundInstance.Play();
+				}
+
+				else if (collect.collectableType == (int)Collectable.CollectableType.fasterPlayer)
+				{
+					theGame.collectables.Remove(collect);
+					theGame.playerSpeed += 10000;
+					getSoundInstance.Play();
 				}
 
 

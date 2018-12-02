@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace CatAndMouse
 {
-   class Player
+   public class Player
     {
         public Sprite playerSprite = new Sprite();
 

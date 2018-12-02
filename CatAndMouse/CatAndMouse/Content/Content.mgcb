@@ -194,3 +194,9 @@
 /processorParam:TextureFormat=Color
 /build:M_WalkUp.png
 
+#begin get.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:get.wav
+
