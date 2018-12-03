@@ -103,7 +103,7 @@ namespace CatAndMouse
 				else if (collect.collectableType == (int)Collectable.CollectableType.fasterPlayer)
 				{
 					theGame.collectables.Remove(collect);
-					theGame.playerSpeed += 10000;
+					theGame.player.playerSpeed += 10000;
 					getSoundInstance.Play();
 				}
 

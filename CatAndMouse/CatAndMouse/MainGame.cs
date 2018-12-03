@@ -23,7 +23,7 @@ namespace CatAndMouse
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Player player = new Player();
+        public Player player = new Player();
         //public Enemy enemy = new Enemy();
         public Cat cat = new Cat();
         public CatSpawn catSpawn = new CatSpawn();
@@ -204,7 +204,46 @@ namespace CatAndMouse
 
 				switch (randomCollect)
 				{
+					case 1:
+						Collectable cheese = new Collectable();
+						cheese.Load(Content, this);
+						cheese.collectableType = 1;
+						collectables.Add(cheese);
 
+						break;
+
+					case 2:
+						Collectable SloMo = new Collectable();
+						SloMo.Load(Content, this);
+						SloMo.collectableType = (int)Collectable.CollectableType.SloMo;
+						collectables.Add(SloMo);
+
+						break;
+
+					case 3:
+						Collectable extraLife = new Collectable();
+						extraLife.Load(Content, this);
+						extraLife.collectableType = (int)Collectable.CollectableType.extraLife;
+						collectables.Add(extraLife);
+
+						break;
+
+
+					case 4:
+						Collectable fasterPlayer = new Collectable();
+						fasterPlayer.Load(Content, this);
+						fasterPlayer.collectableType = (int)Collectable.CollectableType.fasterPlayer;
+						collectables.Add(fasterPlayer);
+
+						break;
+
+					case 5:
+						Collectable moreCheese = new Collectable();
+						moreCheese.Load(Content, this);
+						moreCheese.collectableType = (int)Collectable.CollectableType.moreCheese;
+						collectables.Add(moreCheese);
+
+						break;
 				}
 			}
 			
