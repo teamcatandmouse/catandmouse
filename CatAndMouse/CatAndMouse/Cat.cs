@@ -61,9 +61,6 @@ namespace CatAndMouse
 
 
             }
-
-            
-
             enemy.Load(content, game);
         }
 
