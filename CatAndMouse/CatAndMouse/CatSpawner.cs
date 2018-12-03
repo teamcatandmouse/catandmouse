@@ -40,9 +40,13 @@ namespace CatAndMouse
 
                 Cat newCat = new Cat();
 
+
                 newCat.Load(content, game);
 
+
                 spawnedCats.Add(newCat);
+
+
 
                 if (game.score > currentScoreLevel)
                 {

@@ -45,7 +45,7 @@
     <Compile Include="Collectable.cs" />
     <Compile Include="Collision.cs" />
     <Compile Include="Enemy.cs" />
-    <Compile Include="CatSpawn.cs" />
+    <Compile Include="CatSpawner.cs" />
     <Compile Include="GameOver.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="MainGame.cs" />

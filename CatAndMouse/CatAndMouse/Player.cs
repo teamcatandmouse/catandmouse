@@ -55,13 +55,7 @@ namespace CatAndMouse
             playerSprite.Update(deltaTime);
             playerSprite.UpdateHitBox();
 
-
-            foreach (Cat cat in game.catSpawn.spawnedCats)
-            {
-                playerSprite = collision.CollideWithObject(playerSprite, cat.enemy.enemySprite, game);
-            }
-
-            
+            playerSprite = collision.CollideWithObject(playerSprite, game.cat.enemy.enemySprite, game);
 
             
 			for (int i = 0; i < game.collectables.Count; i++)
