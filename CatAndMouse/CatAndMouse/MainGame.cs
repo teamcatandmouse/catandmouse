@@ -301,53 +301,49 @@ namespace CatAndMouse
 				Random rand = new Random();
 				int randomCollect = rand.Next(1, 5);
 
-				Collectable collect = new Collectable();
-
 				switch (randomCollect)
 				{
 					case 1:
-						collect.collectableType = 1;
-						collect.Load(Content, this);
-						
-						collectables.Add(collect);
+						Collectable cheese = new Collectable();
+						cheese.Load(Content, this);
+						cheese.collectableType = 1;
+						collectables.Add(cheese);
 
 						break;
 
 					case 2:
-						collect.collectableType = (int)Collectable.CollectableType.SloMo;
-						collect.Load(Content, this);
-						
-						collectables.Add(collect);
+						Collectable SloMo = new Collectable();
+						SloMo.Load(Content, this);
+						SloMo.collectableType = (int)Collectable.CollectableType.SloMo;
+						collectables.Add(SloMo);
 
 						break;
 
 					case 3:
-						collect.collectableType = (int)Collectable.CollectableType.extraLife;
-						collect.Load(Content, this);
-						
-						collectables.Add(collect);
+						Collectable extraLife = new Collectable();
+						extraLife.Load(Content, this);
+						extraLife.collectableType = (int)Collectable.CollectableType.extraLife;
+						collectables.Add(extraLife);
 
 						break;
 
 
 					case 4:
-						collect.collectableType = (int)Collectable.CollectableType.fasterPlayer;
-						collect.Load(Content, this);
-						
-						collectables.Add(collect);
+						Collectable fasterPlayer = new Collectable();
+						fasterPlayer.Load(Content, this);
+						fasterPlayer.collectableType = (int)Collectable.CollectableType.fasterPlayer;
+						collectables.Add(fasterPlayer);
 
 						break;
 
 					case 5:
-						collect.collectableType = (int)Collectable.CollectableType.moreCheese;
-						collect.Load(Content, this);
-				
-						collectables.Add(collect);
+						Collectable moreCheese = new Collectable();
+						moreCheese.Load(Content, this);
+						moreCheese.collectableType = (int)Collectable.CollectableType.moreCheese;
+						collectables.Add(moreCheese);
 
 						break;
 				}
-
-				collectableSpawnTimer = collectableSpawnDefaultTime;
 			}
 			
 		}
