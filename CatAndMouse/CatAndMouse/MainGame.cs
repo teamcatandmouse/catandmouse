@@ -39,7 +39,11 @@ namespace CatAndMouse
         public int lives = 3;
         Texture2D heart = null;
 
-		
+        const int STATE_SPLASH = 0;
+        const int STATE_GAME = 1;
+        const int STATE_GAMEOVER = 2;
+
+        int gameState = STATE_SPLASH;
 
 		public float collectableSpawnTimer = 6.0f;
 		float collectableSpawnDefaultTime = 6.0f;
@@ -65,7 +69,8 @@ namespace CatAndMouse
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
+
+    
             base.Initialize();
         }
 
@@ -78,11 +83,7 @@ namespace CatAndMouse
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            AIE.StateManager.CreateState("SPLASH", new SplashState());
-            AIE.StateManager.CreateState("GAME", new SplashState());
-            AIE.StateManager.CreateState("GAMEOVER", new SplashState());
-
-            AIE.StateManager.PushState("SPLASH");
+           
 
             player.Load(Content, this);
             cat.Load(Content, this);
@@ -118,49 +119,95 @@ namespace CatAndMouse
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
+                || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+     
+
+            switch (gameState)
+            {
+                case STATE_SPLASH:
+                    UpdateSplashState(deltaTime);
+                    break;
+                case STATE_GAME:
+                    UpdateGameState(deltaTime);
+                    break;
+                case STATE_GAMEOVER:
+                    UpdateGameOverState(deltaTime);
+                    break;
+            }
+
+            base.Update(gameTime);
+
+        }
+
+
+        private void UpdateSplashState(float deltaTime)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+            {
+                gameState = STATE_GAME;
+                
+            }
+        }
+
+       private void DrawSplashState(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+            spriteBatch.DrawString(scoreFont, "Cat & Mouse", new Vector2(350, 150), Color.LightGreen);
+            spriteBatch.DrawString(scoreFont, "Press Enter to begin.", new Vector2(330, 300), Color.White);
+            spriteBatch.End();
+
+        }
+
+        public void UpdateGameState(float deltaTime)
+        {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            AIE.StateManager.Update(Content, gameTime);
-
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);
             catSpawn.Update(deltaTime);
 
-            foreach(Cat cat in catSpawn.spawnedCats)
+            foreach (Cat cat in catSpawn.spawnedCats)
             {
                 cat.Update(deltaTime);
             }
 
             //cat.Update(deltaTime);
 
-			CheckForCollectableSpawn(deltaTime);
+            CheckForCollectableSpawn(deltaTime);
 
-            
-			foreach (Collectable Cheese in collectables)
-			{
-				Cheese.Update(deltaTime);
-			}
-            
 
-			// TODO: Add your update logic here
+            foreach (Collectable Cheese in collectables)
+            {
+                Cheese.Update(deltaTime);
+            }
 
-			base.Update(gameTime);
+            if (lives <= 0)
+            {
+                gameState = STATE_GAMEOVER;
+
+            }
+            // TODO: Add your update logic here
+
+
         }
-
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
+  
+
+       void DrawGameState(SpriteBatch spriteBatch)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            AIE.StateManager.Draw(spriteBatch);
-
             spriteBatch.Begin();
-            mapRenderer.Draw(map);           
 
+            mapRenderer.Draw(map);
             player.Draw(spriteBatch);
             cat.Draw(spriteBatch);
 
@@ -171,13 +218,15 @@ namespace CatAndMouse
 
 
             foreach (Collectable Cheese in collectables)
-			{
-				Cheese.Draw(spriteBatch);
-			}
+            {
+                Cheese.Draw(spriteBatch);
+            }
+
+            spriteBatch.End();
+
+            spriteBatch.Begin();
+            spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
             
-
-			spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(28, 15), Color.DarkBlue);
-
             int loopCount = 0;
 
             while (loopCount < lives)
@@ -187,13 +236,63 @@ namespace CatAndMouse
 
                 loopCount++;
             }
-			spriteBatch.End();
-           
+
+            spriteBatch.End();
+
+            
+            
+        }
+
+       
+
+        private void UpdateGameOverState(float deltaTime)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+            {
+                gameState = STATE_SPLASH;
+            }
+
+            else if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) == true)
+            {
+                gameState = STATE_SPLASH;
+
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.RightShift) == true)
+            {
+                gameState = STATE_SPLASH;
+
+            }
+        }
+
+        private void DrawGameOverState(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(scoreFont, "Game Over! Press Enter To Continue.", new Vector2(285, 150), Color.White);
+            spriteBatch.DrawString(scoreFont, "Press Shift To Return To Title Screen.", new Vector2(480, 445), Color.White);
+        }
+        protected override void Draw(GameTime gameTime)
+        {
+            //spriteBatch.Begin();
+
+            switch (gameState)
+            {
+                case STATE_SPLASH:
+                    DrawSplashState(spriteBatch);
+                    break;
+                case STATE_GAME:
+                    DrawGameState(spriteBatch);
+                    break;
+                case STATE_GAMEOVER:
+                    DrawGameOverState(spriteBatch);
+                    break;
+
+            }
+
+            //spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
-		void CheckForCollectableSpawn(float deltaTime)
+        void CheckForCollectableSpawn(float deltaTime)
 		{
 			collectableSpawnTimer -= deltaTime;
 
