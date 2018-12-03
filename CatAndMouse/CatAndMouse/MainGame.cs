@@ -9,6 +9,8 @@ using System.Collections;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 using System;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 
 
 
@@ -28,8 +30,11 @@ namespace CatAndMouse
         public Cat cat = new Cat();
         public CatSpawn catSpawn = new CatSpawn();
 
+		SoundEffect getSound;
+		SoundEffectInstance getSoundInstance;
 
-        TiledMap map = null;
+
+		TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
 
 		Song gameMusic;
@@ -101,7 +106,10 @@ namespace CatAndMouse
 
 			gameMusic = Content.Load<Song>("fast_music");
 			MediaPlayer.Play(gameMusic);
-        }
+
+			getSound = Content.Load<SoundEffect>("get");
+			getSoundInstance = getSound.CreateInstance();
+		}
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload

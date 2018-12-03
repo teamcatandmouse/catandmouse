@@ -14,16 +14,9 @@ namespace CatAndMouse
     {
         public MainGame game;
 
-		SoundEffect getSound;
-		SoundEffectInstance getSoundInstance;
+	
 
 
-		public void Load(ContentManager content, MainGame theGame)
-		{
-			getSound = content.Load<SoundEffect>("get");
-			getSoundInstance = getSound.CreateInstance();
-		}
-		
 
 
 		public bool IsColliding(Sprite hero, Sprite otherSprite)
