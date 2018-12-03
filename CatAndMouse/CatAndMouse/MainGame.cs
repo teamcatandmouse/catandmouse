@@ -163,8 +163,14 @@ namespace CatAndMouse
 
             player.Draw(spriteBatch);
             cat.Draw(spriteBatch);
-            
-			foreach (Collectable Cheese in collectables)
+
+            foreach (Cat cat in catSpawn.spawnedCats)
+            {
+                cat.Draw(spriteBatch);
+            }
+
+
+            foreach (Collectable Cheese in collectables)
 			{
 				Cheese.Draw(spriteBatch);
 			}
