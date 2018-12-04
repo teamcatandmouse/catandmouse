@@ -40,14 +40,16 @@ namespace CatAndMouse
 		Song gameMusic;
 
         Texture2D title = null;
+        Texture2D howToPlay = null;
         SpriteFont scoreFont;
         public int score = 0;
         public int lives = 3;
         Texture2D heart = null;
 
         const int STATE_SPLASH = 0;
-        const int STATE_GAME = 1;
-        const int STATE_GAMEOVER = 2;
+        const int STATE_INST = 1;
+        const int STATE_GAME = 2;
+        const int STATE_GAMEOVER = 3;
 
         int gameState = STATE_SPLASH;
 
@@ -111,7 +113,8 @@ namespace CatAndMouse
 			getSound = Content.Load<SoundEffect>("get");
 			getSoundInstance = getSound.CreateInstance();
 
-            title = Content.Load<Texture2D>("Title");
+            title = Content.Load<Texture2D>("Title2");
+            howToPlay = Content.Load<Texture2D>("HTP");
 		}
 
         /// <summary>
@@ -143,6 +146,9 @@ namespace CatAndMouse
                 case STATE_SPLASH:
                     UpdateSplashState(deltaTime);
                     break;
+                case STATE_INST:
+                    UpdateInstState(deltaTime);
+                    break;
                 case STATE_GAME:
                     UpdateGameState(deltaTime);
                     break;
@@ -164,6 +170,14 @@ namespace CatAndMouse
                
                 
             }
+            else if (Keyboard.GetState().IsKeyDown(Keys.RightShift) == true) 
+            {
+                gameState = STATE_INST;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) == true)
+            {
+                gameState = STATE_INST;
+            }
         }
 
        private void DrawSplashState(SpriteBatch spriteBatch)
@@ -173,6 +187,21 @@ namespace CatAndMouse
             spriteBatch.Draw(title, Vector2.Zero, Color.White);         
             spriteBatch.End();
 
+        }
+
+        private void UpdateInstState(float deltaTime)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
+            {
+                gameState = STATE_GAME;
+            }
+        }
+
+        private void DrawInstState(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(howToPlay, Vector2.Zero, Color.White);
+            spriteBatch.End();
         }
 
         public void UpdateGameState(float deltaTime)
@@ -200,6 +229,7 @@ namespace CatAndMouse
 
             if (lives <= 0)
             {
+                
                 gameState = STATE_GAMEOVER;
 
             }
@@ -289,6 +319,9 @@ namespace CatAndMouse
             {
                 case STATE_SPLASH:
                     DrawSplashState(spriteBatch);
+                    break;
+                case STATE_INST:
+                    DrawInstState(spriteBatch);
                     break;
                 case STATE_GAME:
                     DrawGameState(spriteBatch);

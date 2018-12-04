@@ -39,7 +39,7 @@ namespace CatAndMouse
 					break;
 
 				case (int)CollectableType.fasterPlayer:
-					animation.Load(content, "PU_Multiplier", 1, 1);
+					animation.Load(content, "PU_FastPlayer", 1, 1);
 					break;
 
 				case (int)CollectableType.moreCheese:
