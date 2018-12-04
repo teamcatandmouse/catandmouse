@@ -39,6 +39,7 @@ namespace CatAndMouse
 
 		Song gameMusic;
 
+        Texture2D title = null;
         SpriteFont scoreFont;
         public int score = 0;
         public int lives = 3;
@@ -93,7 +94,7 @@ namespace CatAndMouse
             player.Load(Content, this);
             cat.Load(Content, this);
             catSpawn.Load(Content, this);
-			//collectable.Load(Content, this);
+            //collectable.Load(Content, this);
 
             //scoreFont = Content.Load<SpriteFont>("Score");
 
@@ -109,6 +110,8 @@ namespace CatAndMouse
 
 			getSound = Content.Load<SoundEffect>("get");
 			getSoundInstance = getSound.CreateInstance();
+
+            title = Content.Load<Texture2D>("Title");
 		}
 
         /// <summary>
@@ -158,6 +161,7 @@ namespace CatAndMouse
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
             {
                 gameState = STATE_GAME;
+               
                 
             }
         }
@@ -165,8 +169,8 @@ namespace CatAndMouse
        private void DrawSplashState(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.DrawString(scoreFont, "Cat & Mouse", new Vector2(350, 150), Color.LightGreen);
-            spriteBatch.DrawString(scoreFont, "Press Enter to begin.", new Vector2(330, 300), Color.White);
+            mapRenderer.Draw(map);
+            spriteBatch.Draw(title, Vector2.Zero, Color.White);         
             spriteBatch.End();
 
         }
