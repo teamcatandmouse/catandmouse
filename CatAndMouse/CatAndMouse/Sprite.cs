@@ -60,16 +60,8 @@ namespace CatAndMouse
             animationOffsets.Add(new Vector2(xOffset, yOffset));
         }
 
-        public void Update(float deltaTime)
-        {
-            animations[currentAnimation].UpdateFrame(deltaTime);
-        }
+     
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-           // spriteBatch.Draw(texture, position + offset, Color.White);
-            animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation], effects);
-        }
 
 
 
@@ -81,7 +73,19 @@ namespace CatAndMouse
 			theBottom = theTop + objectHeight;
 		}
 
-        public void SetFlipped(bool state)
+		public void Update(float deltaTime)
+		{
+			animations[currentAnimation].UpdateFrame(deltaTime);
+		}
+
+		public void Draw(SpriteBatch spriteBatch)
+		{
+			// spriteBatch.Draw(texture, position + offset, Color.White);
+			animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation], effects);
+		}
+
+
+		public void SetFlipped(bool state)
         {
             if (state == true)
             {
