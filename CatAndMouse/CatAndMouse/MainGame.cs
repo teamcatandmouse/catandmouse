@@ -39,6 +39,7 @@ namespace CatAndMouse
 
 		Song gameMusic;
 
+        Texture2D gameOver = null;
         Texture2D title = null;
         Texture2D howToPlay = null;
         SpriteFont scoreFont;
@@ -57,7 +58,8 @@ namespace CatAndMouse
 		float collectableSpawnDefaultTime = 6.0f;
 
 		public ArrayList collectables = new ArrayList();
-		
+
+        public bool resetCats = false;
 
 		public MainGame()
         {
@@ -113,8 +115,10 @@ namespace CatAndMouse
 			getSound = Content.Load<SoundEffect>("get");
 			getSoundInstance = getSound.CreateInstance();
 
+            gameOver = Content.Load<Texture2D>("GameOver");
             title = Content.Load<Texture2D>("Title2");
             howToPlay = Content.Load<Texture2D>("HTP");
+            
 		}
 
         /// <summary>
@@ -194,6 +198,7 @@ namespace CatAndMouse
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
             {
                 gameState = STATE_GAME;
+                InitGame();
             }
         }
 
@@ -212,10 +217,20 @@ namespace CatAndMouse
             player.Update(deltaTime);
             catSpawn.Update(deltaTime);
 
-            foreach (Cat cat in catSpawn.spawnedCats)
+            if (resetCats == false)
             {
-                cat.Update(deltaTime);
+                foreach (Cat cat in catSpawn.spawnedCats)
+                {
+                    cat.Update(deltaTime);
+                }
             }
+
+            else if (resetCats == true)
+            {
+                catSpawn.spawnedCats.Clear();
+                resetCats = false;
+            }
+            
 
             //cat.Update(deltaTime);
 
@@ -233,6 +248,8 @@ namespace CatAndMouse
                 gameState = STATE_GAMEOVER;
 
             }
+
+            
             // TODO: Add your update logic here
 
 
@@ -253,10 +270,14 @@ namespace CatAndMouse
             player.Draw(spriteBatch);
             cat.Draw(spriteBatch);
 
-            foreach (Cat cat in catSpawn.spawnedCats)
+            if (resetCats == false)
             {
-                cat.Draw(spriteBatch);
+                foreach (Cat cat in catSpawn.spawnedCats)
+                {
+                    cat.Draw(spriteBatch);
+                }
             }
+         
 
 
             foreach (Collectable Cheese in collectables)
@@ -281,7 +302,7 @@ namespace CatAndMouse
 
             spriteBatch.End();
 
-            
+         
             
         }
 
@@ -291,25 +312,30 @@ namespace CatAndMouse
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
             {
-                gameState = STATE_SPLASH;
+                gameState = STATE_INST;
             }
 
-            else if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) == true)
+            else if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
             {
                 gameState = STATE_SPLASH;
-
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.RightShift) == true)
-            {
-                gameState = STATE_SPLASH;
 
-            }
+       
+            
+
+
+
         }
 
         private void DrawGameOverState(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(scoreFont, "Game Over! Press Enter To Continue.", new Vector2(285, 150), Color.White);
-            spriteBatch.DrawString(scoreFont, "Press Shift To Return To Title Screen.", new Vector2(480, 445), Color.White);
+    
+            spriteBatch.Begin();
+            mapRenderer.Draw(map);
+            spriteBatch.Draw(gameOver, Vector2.Zero, Color.White);
+            spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(325, 350), Color.DarkBlue);
+            spriteBatch.End();
+
         }
         protected override void Draw(GameTime gameTime)
         {
@@ -394,8 +420,17 @@ namespace CatAndMouse
 
 				collectableSpawnTimer = collectableSpawnDefaultTime;
 			}
-			
+
 		}
+
+        void InitGame()
+        {
+            score = 0;
+            lives = 3;
+            catSpawn.spawnedCats.Clear();
+            collectables.Clear();
+        }
+
 
     }
 }
