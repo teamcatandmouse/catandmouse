@@ -41,7 +41,7 @@ namespace CatAndMouse
 			powerSprite.Draw(spriteBatch);
 		}
 
-		public void Update(float deltaTime)
+		public void Update(float deltaTime, Collectable collect)
 		{
 			collision.game = game;
 			powerSprite.UpdateHitBox();
@@ -51,8 +51,8 @@ namespace CatAndMouse
 
 			if (despawnTimer <= 0)
 			{
-				
-			}
+                game.collectables.Remove(collect);
+            }
 
 		}
 	}

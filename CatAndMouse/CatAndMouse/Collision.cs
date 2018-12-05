@@ -13,6 +13,7 @@ namespace CatAndMouse
     class Collision
     {
         public MainGame game;
+        public float usageTimer = 5;
 
 	
 
@@ -42,8 +43,12 @@ namespace CatAndMouse
                 {
                     //Remove life upon collision
                     game.lives -= 1;
-                    //Reset game??
+                    //Reset player
                     hero.position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
+                    //Reset cats
+
+                    //Reset collectables
+
                 }
                 else if (other.isCollectable == true)
                 {
@@ -79,13 +84,22 @@ namespace CatAndMouse
 				else if (collect.collectableType == (int)Collectable.CollectableType.SloMo)
 				{
 					theGame.collectables.Remove(collect);
+                    
 					//getSoundInstance.Play();
 				}
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.extraLife)
 				{
 					theGame.collectables.Remove(collect);
-					theGame.lives += 1;
+                    if (theGame.lives < 3)
+                    {
+                        theGame.lives += 1;
+                    }
+                    else
+                    {
+
+                    }
+					
 					//getSoundInstance.Play();
 				}
 
@@ -98,8 +112,14 @@ namespace CatAndMouse
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.fasterPlayer)
 				{
-					theGame.collectables.Remove(collect);
-					theGame.player.playerSpeed += 10000;
+                    usageTimer -= deltaTime;
+                    theGame.collectables.Remove(collect);
+					theGame.player.playerSpeed += 1000000;
+
+                    if (usageTimer <= 0)
+                    {
+                        theGame.player.playerSpeed = 12500;
+                    }
 					//getSoundInstance.Play();
 				}
 

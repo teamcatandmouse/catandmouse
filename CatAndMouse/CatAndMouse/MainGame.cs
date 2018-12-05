@@ -236,6 +236,8 @@ namespace CatAndMouse
                 gameState = STATE_GAMEOVER;
 
             }
+
+            
             // TODO: Add your update logic here
 
 
@@ -303,7 +305,7 @@ namespace CatAndMouse
             }
 
             lives = 3;
-            score = 0;
+            
 
 
 
@@ -315,7 +317,9 @@ namespace CatAndMouse
             spriteBatch.Begin();
             mapRenderer.Draw(map);
             spriteBatch.Draw(gameOver, Vector2.Zero, Color.White);
+            spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), new Vector2(325, 350), Color.DarkBlue);
             spriteBatch.End();
+
         }
         protected override void Draw(GameTime gameTime)
         {
