@@ -40,7 +40,10 @@ namespace CatAndMouse
            {
                 if (other.isEnemy == true)
                 {
-                    game.Exit();
+                    //Remove life upon collision
+                    game.lives -= 1;
+                    //Reset game??
+                    hero.position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
                 }
                 else if (other.isCollectable == true)
                 {

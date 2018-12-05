@@ -39,6 +39,7 @@ namespace CatAndMouse
 
 		Song gameMusic;
 
+        Texture2D gameOver = null;
         Texture2D title = null;
         Texture2D howToPlay = null;
         SpriteFont scoreFont;
@@ -113,8 +114,10 @@ namespace CatAndMouse
 			getSound = Content.Load<SoundEffect>("get");
 			getSoundInstance = getSound.CreateInstance();
 
+            gameOver = Content.Load<Texture2D>("GameOver");
             title = Content.Load<Texture2D>("Title2");
             howToPlay = Content.Load<Texture2D>("HTP");
+            
 		}
 
         /// <summary>
@@ -281,7 +284,7 @@ namespace CatAndMouse
 
             spriteBatch.End();
 
-            
+         
             
         }
 
@@ -291,25 +294,28 @@ namespace CatAndMouse
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
             {
-                gameState = STATE_SPLASH;
+                gameState = STATE_GAME;
             }
 
-            else if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) == true)
+            else if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
             {
                 gameState = STATE_SPLASH;
-
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.RightShift) == true)
-            {
-                gameState = STATE_SPLASH;
 
-            }
+            lives = 3;
+            score = 0;
+
+
+
         }
 
         private void DrawGameOverState(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(scoreFont, "Game Over! Press Enter To Continue.", new Vector2(285, 150), Color.White);
-            spriteBatch.DrawString(scoreFont, "Press Shift To Return To Title Screen.", new Vector2(480, 445), Color.White);
+    
+            spriteBatch.Begin();
+            mapRenderer.Draw(map);
+            spriteBatch.Draw(gameOver, Vector2.Zero, Color.White);
+            spriteBatch.End();
         }
         protected override void Draw(GameTime gameTime)
         {
@@ -396,6 +402,7 @@ namespace CatAndMouse
 			}
 			
 		}
+
 
     }
 }
