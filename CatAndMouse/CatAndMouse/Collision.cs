@@ -44,10 +44,10 @@ namespace CatAndMouse
                     //Remove life upon collision
                     game.lives -= 1;
                     //Reset player
-                    hero.position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
-                    //Reset cats
+                    game.resetCats = true;
 
-                    //Reset collectables
+                    hero.position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
+               
 
                 }
                 else if (other.isCollectable == true)

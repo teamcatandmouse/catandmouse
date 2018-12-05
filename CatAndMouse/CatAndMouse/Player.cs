@@ -61,13 +61,13 @@ namespace CatAndMouse
 			playerSprite.UpdateHitBox();
 
 
-			foreach (Cat cat in game.catSpawn.spawnedCats)
-			{
-				playerSprite = collision.CollideWithObject(playerSprite, cat.enemy.enemySprite, game);
-			}
-
-
-
+            if (game.resetCats == false)
+            {
+                foreach (Cat cat in game.catSpawn.spawnedCats)
+                {
+                    playerSprite = collision.CollideWithObject(playerSprite, cat.enemy.enemySprite, game);
+                }
+            }
 
 			for (int i = 0; i < game.collectables.Count; i++)
 			{

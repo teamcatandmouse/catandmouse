@@ -58,7 +58,8 @@ namespace CatAndMouse
 		float collectableSpawnDefaultTime = 6.0f;
 
 		public ArrayList collectables = new ArrayList();
-		
+
+        public bool resetCats = false;
 
 		public MainGame()
         {
@@ -197,6 +198,7 @@ namespace CatAndMouse
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
             {
                 gameState = STATE_GAME;
+                InitGame();
             }
         }
 
@@ -215,10 +217,20 @@ namespace CatAndMouse
             player.Update(deltaTime);
             catSpawn.Update(deltaTime);
 
-            foreach (Cat cat in catSpawn.spawnedCats)
+            if (resetCats == false)
             {
-                cat.Update(deltaTime);
+                foreach (Cat cat in catSpawn.spawnedCats)
+                {
+                    cat.Update(deltaTime);
+                }
             }
+
+            else if (resetCats == true)
+            {
+                catSpawn.spawnedCats.Clear();
+                resetCats = false;
+            }
+            
 
             //cat.Update(deltaTime);
 
@@ -258,10 +270,14 @@ namespace CatAndMouse
             player.Draw(spriteBatch);
             cat.Draw(spriteBatch);
 
-            foreach (Cat cat in catSpawn.spawnedCats)
+            if (resetCats == false)
             {
-                cat.Draw(spriteBatch);
+                foreach (Cat cat in catSpawn.spawnedCats)
+                {
+                    cat.Draw(spriteBatch);
+                }
             }
+         
 
 
             foreach (Collectable Cheese in collectables)
@@ -296,7 +312,7 @@ namespace CatAndMouse
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) == true)
             {
-                gameState = STATE_GAME;
+                gameState = STATE_INST;
             }
 
             else if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
@@ -304,7 +320,7 @@ namespace CatAndMouse
                 gameState = STATE_SPLASH;
             }
 
-            lives = 3;
+       
             
 
 
@@ -404,8 +420,16 @@ namespace CatAndMouse
 
 				collectableSpawnTimer = collectableSpawnDefaultTime;
 			}
-			
+
 		}
+
+        void InitGame()
+        {
+            score = 0;
+            lives = 3;
+            catSpawn.spawnedCats.Clear();
+            collectables.Clear();
+        }
 
 
     }
