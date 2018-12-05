@@ -70,34 +70,34 @@ namespace CatAndMouse
 				{
 					theGame.collectables.Remove(collect);
 					theGame.score += 10;
-					getSoundInstance.Play();
+					//getSoundInstance.Play();
 				}
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.SloMo)
 				{
 					theGame.collectables.Remove(collect);
-					getSoundInstance.Play();
+					//getSoundInstance.Play();
 				}
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.extraLife)
 				{
 					theGame.collectables.Remove(collect);
 					theGame.lives += 1;
-					getSoundInstance.Play();
+					//getSoundInstance.Play();
 				}
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.moreCheese)
 				{
 					theGame.collectables.Remove(collect);
 					theGame.score += 30;
-					getSoundInstance.Play();
+					//getSoundInstance.Play();
 				}
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.fasterPlayer)
 				{
 					theGame.collectables.Remove(collect);
 					theGame.player.playerSpeed += 10000;
-					getSoundInstance.Play();
+					//getSoundInstance.Play();
 				}
 
 
