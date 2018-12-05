@@ -73,7 +73,11 @@ namespace CatAndMouse
 					//getSoundInstance.Play();
 				}
 
-				
+				else if (collect.collectableType == (int)Collectable.CollectableType.SloMo)
+				{
+					theGame.collectables.Remove(collect);
+					//getSoundInstance.Play();
+				}
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.extraLife)
 				{

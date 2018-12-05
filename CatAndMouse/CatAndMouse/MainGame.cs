@@ -358,9 +358,15 @@ namespace CatAndMouse
 
 						break;
 
-					
-
 					case 2:
+						collect.collectableType = (int)Collectable.CollectableType.SloMo;
+						collect.Load(Content, this);
+						
+						collectables.Add(collect);
+
+						break;
+
+					case 3:
 						collect.collectableType = (int)Collectable.CollectableType.extraLife;
 						collect.Load(Content, this);
 						
@@ -369,7 +375,7 @@ namespace CatAndMouse
 						break;
 
 
-					case 3:
+					case 4:
 						collect.collectableType = (int)Collectable.CollectableType.fasterPlayer;
 						collect.Load(Content, this);
 						
@@ -377,7 +383,7 @@ namespace CatAndMouse
 
 						break;
 
-					case 4:
+					case 5:
 						collect.collectableType = (int)Collectable.CollectableType.moreCheese;
 						collect.Load(Content, this);
 				

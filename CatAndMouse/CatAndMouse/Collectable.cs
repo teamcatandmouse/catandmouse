@@ -47,7 +47,9 @@ namespace CatAndMouse
 					break;
 
 
-			
+				case (int)CollectableType.SloMo:
+					animation.Load(content, "PU_Cats", 1, 1);
+					break;
 			}
 
 			
