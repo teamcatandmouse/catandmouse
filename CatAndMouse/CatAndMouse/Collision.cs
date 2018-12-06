@@ -81,7 +81,11 @@ namespace CatAndMouse
 					//getSoundInstance.Play();
 				}
 
+<<<<<<< HEAD
 			
+=======
+				
+>>>>>>> parent of 5b6a546... Revert "removed slomo"
 
 				else if (collect.collectableType == (int)Collectable.CollectableType.extraLife)
 				{
